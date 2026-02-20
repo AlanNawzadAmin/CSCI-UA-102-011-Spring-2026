@@ -1,0 +1,114 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{amsmath}
+
+\lstset{
+  language=Java,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\bfseries\color{blue!70!black},
+  commentstyle=\color{green!50!black},
+  stringstyle=\color{red!60!black},
+  showstringspaces=false,
+  frame=single,
+  framesep=6pt,
+  xleftmargin=6pt,
+  xrightmargin=6pt,
+  aboveskip=10pt,
+  belowskip=10pt,
+}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+  {\Large \textbf{CSCI-UA 102 --- Quiz 2}} \\[6pt]
+  {\large Stacks} \\[4pt]
+  Name: \underline{\hspace{2.5in}} \quad NetID: \underline{\hspace{1.5in}}
+\end{center}
+
+\bigskip
+
+\section*{Asteroid Collision}
+
+An array of integers represents asteroids in a row.
+For each asteroid, the \textbf{absolute value} is its size and the \textbf{sign} is its direction:
+positive means moving \textbf{right}, negative means moving \textbf{left}.
+All asteroids move at the same speed.
+
+When two asteroids moving in \textbf{opposite directions} meet, the smaller one explodes.
+If they are the same size, both explode.
+Two asteroids moving in the same direction never meet.
+
+\textbf{Write a method} \texttt{int[] asteroidCollision(int[] asteroids)} that returns the state of the asteroids after all collisions, in their original order.
+
+\bigskip
+
+\noindent\textbf{Examples:}
+\begin{itemize}[nosep]
+  \item \texttt{[5, 10, -5]} $\rightarrow$ \texttt{[5, 10]} \quad (10 and $-5$ collide; $-5$ explodes)
+  \item \texttt{[8, -8]} $\rightarrow$ \texttt{[]} \quad (same size, both explode)
+  \item \texttt{[-2, -1, 1, 2]} $\rightarrow$ \texttt{[-2, -1, 1, 2]} \quad (no collisions occur)
+  \item \texttt{[10, 2, -5]} $\rightarrow$ \texttt{[10]} \quad ($-5$ destroys 2, then loses to 10)
+  \item \texttt{[15, 3, 2, 1, -5]} $\rightarrow$ \texttt{[15]} \quad ($-5$ destroys 1, 2, and 3, then loses to 15)
+\end{itemize}
+
+\bigskip
+
+\noindent\textbf{You may use the following \texttt{Stack} interface and assume a working implementation exists:}
+\begin{lstlisting}
+public interface Stack<E> {
+    E pop();          // remove and return the top element
+    void push(E e);   // add element to the top
+    int size();       // number of elements in the stack
+}
+\end{lstlisting}
+
+\vfill
+
+\noindent\textbf{What is the time complexity of your solution?} \underline{\hspace{2in}}
+
+\newpage
+
+{\color{blue}
+\section*{Solution}
+
+\begin{lstlisting}[basicstyle=\ttfamily\small\color{blue},
+  keywordstyle=\bfseries\color{blue!70!black},
+  commentstyle=\color{blue!50}]
+public static int[] asteroidCollision(int[] asteroids) {
+    Stack<Integer> s = new LinkedStack<>();
+    for (int a : asteroids) {
+        boolean alive = true;
+        while (alive && a < 0 && s.size() > 0) {
+            int top = s.pop();
+            if (top < 0) {
+                // both going left -- no collision
+                s.push(top);
+                break;
+            }
+            // top > 0, a < 0: collision
+            if (top > -a) {
+                s.push(top);       // top survives
+                alive = false;
+            } else if (top == -a) {
+                alive = false;     // both die
+            }
+            // else: top < -a, top dies, loop continues
+        }
+        if (alive) s.push(a);
+    }
+    int[] result = new int[s.size()];
+    for (int i = result.length - 1; i >= 0; i--)
+        result[i] = s.pop();
+    return result;
+}
+\end{lstlisting}
+
+\textbf{Time complexity:} $O(n)$ --- each asteroid is pushed and popped at most once.
+}
+
+\end{document}
