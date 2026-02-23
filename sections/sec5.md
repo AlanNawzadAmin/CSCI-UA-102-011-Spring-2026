@@ -4,9 +4,7 @@ Textbook: *Data Structures and Algorithms in Java*, 6th Edition — Chapters 5 a
 
 ---
 
-## Quick Refresher (~5 min)
-
-### Anatomy of a Recursive Method
+## Quick Refresh: Recursion
 
 Every recursive method needs:
 1. **Base case(s)** — when to stop recursing
@@ -102,8 +100,6 @@ public static double harmonic(int n) {
 ```
 
 This is linear recursion: one call per step, $O(n)$ total calls, $O(n)$ space.
-
-Note: this is **not** tail recursion because we add $1/n$ *after* the recursive call returns.
 
 </details>
 
