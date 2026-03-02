@@ -59,21 +59,21 @@ public interface Tree<E> {
   commentstyle=\color{blue!50}]
 static <E> int sumHeight(Tree<E> tree) {
     if (tree.isEmpty()) return 0;
-    return computeHelper(tree, tree.root())[1];
+    return subtreeHeightAndSum(tree, tree.root())[1];
 }
 
 // Returns {height, sumOfHeights} for the subtree at p.
-static <E> int[] computeHelper(Tree<E> tree,
-                                Position<E> p) {
-    int h = 0;
+static <E> int[] subtreeHeightAndSum(Tree<E> tree,
+                                      Position<E> p) {
+    int height = 0;
     int sum = 0;
-    for (Position<E> c : tree.children(p)) {
-        int[] result = computeHelper(tree, c);
-        h = Math.max(h, 1 + result[0]);
-        sum += result[1];
+    for (Position<E> child : tree.children(p)) {
+        int[] childResult = subtreeHeightAndSum(tree, child);
+        height = Math.max(height, 1 + childResult[0]);
+        sum += childResult[1];
     }
-    sum += h;                     // add this node's height
-    return new int[]{h, sum};
+    sum += height;                // add this node's height
+    return new int[]{height, sum};
 }
 \end{lstlisting}
 

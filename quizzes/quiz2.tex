@@ -80,30 +80,30 @@ public interface Stack<E> {
   keywordstyle=\bfseries\color{blue!70!black},
   commentstyle=\color{blue!50}]
 public static int[] asteroidCollision(int[] asteroids) {
-    Stack<Integer> s = new LinkedStack<>();
-    for (int a : asteroids) {
+    Stack<Integer> stack = new LinkedStack<>();
+    for (int asteroid : asteroids) {
         boolean alive = true;
-        while (alive && a < 0 && s.size() > 0) {
-            int top = s.pop();
+        while (alive && asteroid < 0 && stack.size() > 0) {
+            int top = stack.pop();
             if (top < 0) {
                 // both going left -- no collision
-                s.push(top);
+                stack.push(top);
                 break;
             }
-            // top > 0, a < 0: collision
-            if (top > -a) {
-                s.push(top);       // top survives
+            // top > 0, asteroid < 0: collision
+            if (top > -asteroid) {
+                stack.push(top);       // top survives
                 alive = false;
-            } else if (top == -a) {
+            } else if (top == -asteroid) {
                 alive = false;     // both die
             }
-            // else: top < -a, top dies, loop continues
+            // else: top < -asteroid, top dies, loop continues
         }
-        if (alive) s.push(a);
+        if (alive) stack.push(asteroid);
     }
-    int[] result = new int[s.size()];
+    int[] result = new int[stack.size()];
     for (int i = result.length - 1; i >= 0; i--)
-        result[i] = s.pop();
+        result[i] = stack.pop();
     return result;
 }
 \end{lstlisting}

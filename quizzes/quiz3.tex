@@ -68,4 +68,41 @@ public int funNum(int[] array)
 
 \noindent\textbf{What is the time complexity of your solution?} \underline{\hspace{2in}}
 
+\newpage
+
+{\color{blue}
+\section*{Solution}
+
+\textbf{Key insight:} \texttt{funNum} only depends on the prefix length, so the recurrence is
+$f(n) = \texttt{array}[n{-}1] + f(n{-}1) + f(n{-}2)$, identical in structure to Fibonacci.
+Naive recursion is $O(2^n)$; an efficient solution avoids recomputation.
+
+\textbf{Efficient solution --- return previous values} (same pattern as Fibonacci):
+
+\begin{lstlisting}[basicstyle=\ttfamily\small\color{blue},
+  keywordstyle=\bfseries\color{blue!70!black},
+  commentstyle=\color{blue!50}]
+public int funNum(int[] array) {
+    if (array.length == 0) return 0;
+    if (array.length == 1) return array[0];
+    return funNumPair(array, array.length)[0];
+}
+
+// returns {funNum(first n elems), funNum(first n-1 elems)}
+private int[] funNumPair(int[] array, int n) {
+    if (n == 1) return new int[]{array[0], 0};
+    int[] prevPair = funNumPair(array, n - 1);
+    // prevPair[0] = f(n-1),  prevPair[1] = f(n-2)
+    int funNumN = array[n - 1] + prevPair[0] + prevPair[1];
+    return new int[]{funNumN, prevPair[0]};
+}
+\end{lstlisting}
+
+The \texttt{funNumPair} method recurses naturally on $n{-}1$ but returns \emph{two} values: 
+$f(n)$ and $f(n{-}1),$ so the caller gets both values it needs from a
+single recursive call instead of two, eliminating the branching.
+
+\bigskip
+\textbf{Time complexity:} $O(n)$ --- each prefix length is computed exactly once.
+
 \end{document}

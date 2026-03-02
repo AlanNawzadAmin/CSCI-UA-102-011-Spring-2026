@@ -79,24 +79,25 @@ public static <E> boolean gapTwoSearch(E a, E b, PositionalList<E> list)
   keywordstyle=\bfseries\color{blue!70!black},
   commentstyle=\color{blue!50}]
 public static <E> boolean gapTwoSearch(E a, E b, PositionalList<E> list) {
-    Position<E> p = list.first();
-    while (p != null) {
-        Position<E> q = list.after(p);       // 1 ahead
-        if (q != null) q = list.after(q);    // 2 ahead
-        if (q != null) {
-            E pElem = p.getElement();
-            E qElem = q.getElement();
-            if ((pElem.equals(a) && qElem.equals(b)) ||
-                (pElem.equals(b) && qElem.equals(a)))
+    Position<E> current = list.first();
+    while (current != null) {
+        Position<E> gapAhead = list.after(current);       // 1 ahead
+        if (gapAhead != null) gapAhead = list.after(gapAhead);    // 2 ahead
+        if (gapAhead != null) gapAhead = list.after(gapAhead);    // 3 ahead
+        if (gapAhead != null) {
+            E currentElem = current.getElement();
+            E aheadElem = gapAhead.getElement();
+            if ((currentElem.equals(a) && aheadElem.equals(b)) ||
+                (currentElem.equals(b) && aheadElem.equals(a)))
                 return true;
         }
-        p = list.after(p);
+        current = list.after(current);
     }
     return false;
 }
 \end{lstlisting}
 
-\noindent Walk through the list, and at each position check if it and the position two ahead form the pair \texttt{(a, b)} in either order. $O(n)$ time.
+\noindent Walk through the list, and at each position check if it and the position three ahead form the pair \texttt{(a, b)} in either order. $O(n)$ time.
 }
 
 \end{document}
