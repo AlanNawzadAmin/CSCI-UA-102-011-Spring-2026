@@ -1,7 +1,7 @@
 # CSCI-UA-102-011-Spring-2026
 Class repo for CSCI-UA 102 011, Spring 2026. I will update this page with updates of what we covered in class as well as notes. 
 
-Shikai's office hours: friday mornings 10AM-12PM in room 318, 60 5th Ave.
+Shikai's office hours: friday mornings 9AM-11AM in room 318, 60 5th Ave.
 
 [Last year's class.](https://github.com/AlanNawzadAmin/CSCI-UA-102-011-Fall-2025)
 
