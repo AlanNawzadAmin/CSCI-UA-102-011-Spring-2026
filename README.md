@@ -132,7 +132,7 @@ Reading: Chapter 10.1.
 
 Hash functions and hashmaps.
 
-Reading: 10.2, 11.1
+Reading: 10.2.1.
 
 ### Section 7, March 7
 
