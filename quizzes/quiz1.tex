@@ -1,0 +1,103 @@
+\documentclass{article}
+\usepackage[margin=1in, top=0.2in]{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{multicol}
+\pagenumbering{gobble}
+
+\lstset{
+  language=Java,
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\bfseries,
+  showstringspaces=false,
+  frame=none,
+  aboveskip=0.3em,
+  belowskip=0.3em,
+  breaklines=true
+}
+
+\title{Quiz 1}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Reference:}
+\vspace{-0.5em}
+\begin{multicols}{2}
+\begin{lstlisting}
+public interface Position<E> {
+  E getElement();
+}
+\end{lstlisting}
+\columnbreak
+\begin{lstlisting}
+public interface PositionalList<E> {
+  int size();
+  boolean isEmpty();
+  Position<E> first();
+  Position<E> last();
+  Position<E> before(Position<E> p);
+  Position<E> after(Position<E> p);
+  Position<E> addFirst(E e);
+  Position<E> addLast(E e);
+  Position<E> addBefore(Position<E> p, E e);
+  Position<E> addAfter(Position<E> p, E e);
+  E set(Position<E> p, E e);
+  E remove(Position<E> p);
+}
+\end{lstlisting}
+\end{multicols}
+
+\noindent\rule{\textwidth}{0.4pt}
+
+\bigskip
+
+\noindent\textbf{Question.}
+Write a method that checks if two elements \texttt{a} and \texttt{b} exist anywhere separated by 2 spots in a \texttt{list}:
+
+\begin{lstlisting}
+public static <E> boolean gapTwoSearch(E a, E b, PositionalList<E> list)
+\end{lstlisting}
+
+\noindent For example, given a list with elements \texttt{[4, 6, 3, 2]}:
+\begin{itemize}
+  \item \texttt{gapTwoSearch(4, 2, list)} returns \texttt{true}
+  \item \texttt{gapTwoSearch(2, 4, list)} returns \texttt{true}
+  \item \texttt{gapTwoSearch(4, 3, list)} returns \texttt{false}
+\end{itemize}
+
+\noindent Your method must be efficient.
+
+\newpage
+
+{\color{blue}
+\noindent\textbf{Solution}
+
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize\color{blue},
+  keywordstyle=\bfseries\color{blue!70!black},
+  commentstyle=\color{blue!50}]
+public static <E> boolean gapTwoSearch(E a, E b, PositionalList<E> list) {
+    Position<E> current = list.first();
+    while (current != null) {
+        Position<E> gapAhead = list.after(current);       // 1 ahead
+        if (gapAhead != null) gapAhead = list.after(gapAhead);    // 2 ahead
+        if (gapAhead != null) gapAhead = list.after(gapAhead);    // 3 ahead
+        if (gapAhead != null) {
+            E currentElem = current.getElement();
+            E aheadElem = gapAhead.getElement();
+            if ((currentElem.equals(a) && aheadElem.equals(b)) ||
+                (currentElem.equals(b) && aheadElem.equals(a)))
+                return true;
+        }
+        current = list.after(current);
+    }
+    return false;
+}
+\end{lstlisting}
+
+\noindent Walk through the list, and at each position check if it and the position three ahead form the pair \texttt{(a, b)} in either order. $O(n)$ time.
+}
+
+\end{document}

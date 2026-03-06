@@ -1,0 +1,87 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{amsmath}
+
+\lstset{
+  language=Java,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\bfseries\color{blue!70!black},
+  commentstyle=\color{green!50!black},
+  stringstyle=\color{red!60!black},
+  showstringspaces=false,
+  frame=single,
+  framesep=6pt,
+  xleftmargin=6pt,
+  xrightmargin=6pt,
+  aboveskip=10pt,
+  belowskip=10pt,
+}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+  {\Large \textbf{CSCI-UA 102 --- Quiz 4}} \\[6pt]
+  {\large Trees} \\[4pt]
+  Name: \underline{\hspace{2.5in}} \quad NetID: \underline{\hspace{1.5in}}
+\end{center}
+
+The \textbf{height} of a node $p$ in a tree is the number of edges on the longest downward path from $p$ to a leaf (external node). A leaf has height 0. \noindent\textbf{Write an efficient, recursive method:}
+\begin{lstlisting}
+static <E> int sumHeight(Tree<E> tree)
+\end{lstlisting}
+that calculates the sum of the heights of every node in the tree. \noindent\textit{Hint: use an auxiliary variable.}
+You may use the following interfaces and assume working implementations exist.
+\begin{lstlisting}
+public interface Position<E> {
+    E getElement();
+}
+public interface Tree<E> {
+    Position<E> root();
+    Iterable<Position<E>> children(Position<E> p);
+    boolean isExternal(Position<E> p);
+    boolean isEmpty();
+}
+\end{lstlisting}
+
+
+\newpage
+
+{\color{blue}
+\section*{Solution}
+
+\begin{lstlisting}[basicstyle=\ttfamily\small\color{blue},
+  keywordstyle=\bfseries\color{blue!70!black},
+  commentstyle=\color{blue!50}]
+static <E> int sumHeight(Tree<E> tree) {
+    if (tree.isEmpty()) return 0;
+    return subtreeHeightAndSum(tree, tree.root())[1];
+}
+
+// Returns {height, sumOfHeights} for the subtree at p.
+static <E> int[] subtreeHeightAndSum(Tree<E> tree,
+                                      Position<E> p) {
+    int height = 0;
+    int sum = 0;
+    for (Position<E> child : tree.children(p)) {
+        int[] childResult = subtreeHeightAndSum(tree, child);
+        height = Math.max(height, 1 + childResult[0]);
+        sum += childResult[1];
+    }
+    sum += height;                // add this node's height
+    return new int[]{height, sum};
+}
+\end{lstlisting}
+
+\textbf{Time complexity:} $O(n)$ --- each node is visited exactly once, with $O(c_p)$ work per node.
+
+\medskip
+
+\textbf{Why return two values?} We need the height (to recurse) \textit{and} the sum of heights (the answer). Returning \texttt{\{height, sumOfHeights\}} lets us compute both in a single bottom-up pass. Without this, computing the height for each node independently would be $O(n)$ per node, giving $O(n^2)$ total.
+}
+
+\end{document}

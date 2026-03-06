@@ -1,0 +1,108 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{amsmath}
+
+\lstset{
+  language=Java,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\bfseries\color{blue!70!black},
+  commentstyle=\color{green!50!black},
+  stringstyle=\color{red!60!black},
+  showstringspaces=false,
+  frame=single,
+  framesep=6pt,
+  xleftmargin=6pt,
+  xrightmargin=6pt,
+  aboveskip=10pt,
+  belowskip=10pt,
+}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+  {\Large \textbf{CSCI-UA 102 --- Quiz 3}} \\[6pt]
+  {\large Recursion} \\[4pt]
+  Name: \underline{\hspace{2.5in}} \quad NetID: \underline{\hspace{1.5in}}
+\end{center}
+
+\bigskip
+
+\section*{funNum}
+
+For an integer array of size $N$, I define the \textbf{funNum} of the array as follows:
+
+\begin{itemize}[nosep]
+  \item If the array has \textbf{no elements}, then funNum is \textbf{0}.
+  \item If the array has \textbf{one element}, then funNum is equal to \textbf{that element}.
+  \item Otherwise, funNum is equal to the \textbf{sum} of:
+    \begin{enumerate}[nosep]
+      \item the last element of the array,
+      \item the funNum of the first $N-1$ elements, and
+      \item the funNum of the first $N-2$ elements.
+    \end{enumerate}
+\end{itemize}
+
+\bigskip
+
+\noindent\textbf{Examples:}
+\begin{itemize}[nosep]
+  \item \texttt{funNum(\{\})} $= 0$
+  \item \texttt{funNum(\{5\})} $= 5$
+  \item \texttt{funNum(\{5, 3\})} $= 3 + 5 + 0 = 8$
+  \item \texttt{funNum(\{5, 3, 1\})} $= 1 + 8 + 5 = 14$
+\end{itemize}
+
+\bigskip
+
+\noindent\textbf{Write an efficient, recursive method:}
+\begin{lstlisting}
+public int funNum(int[] array)
+\end{lstlisting}
+
+\vfill
+
+\noindent\textbf{What is the time complexity of your solution?} \underline{\hspace{2in}}
+
+\newpage
+
+{\color{blue}
+\section*{Solution}
+
+\textbf{Key insight:} \texttt{funNum} only depends on the prefix length, so the recurrence is
+$f(n) = \texttt{array}[n{-}1] + f(n{-}1) + f(n{-}2)$, identical in structure to Fibonacci.
+Naive recursion is $O(2^n)$; an efficient solution avoids recomputation.
+
+\textbf{Efficient solution --- return previous values} (same pattern as Fibonacci):
+
+\begin{lstlisting}[basicstyle=\ttfamily\small\color{blue},
+  keywordstyle=\bfseries\color{blue!70!black},
+  commentstyle=\color{blue!50}]
+public int funNum(int[] array) {
+    if (array.length == 0) return 0;
+    if (array.length == 1) return array[0];
+    return funNumPair(array, array.length)[0];
+}
+
+// returns {funNum(first n elems), funNum(first n-1 elems)}
+private int[] funNumPair(int[] array, int n) {
+    if (n == 1) return new int[]{array[0], 0};
+    int[] prevPair = funNumPair(array, n - 1);
+    // prevPair[0] = f(n-1),  prevPair[1] = f(n-2)
+    int funNumN = array[n - 1] + prevPair[0] + prevPair[1];
+    return new int[]{funNumN, prevPair[0]};
+}
+\end{lstlisting}
+
+The \texttt{funNumPair} method recurses naturally on $n{-}1$ but returns \emph{two} values: 
+$f(n)$ and $f(n{-}1),$ so the caller gets both values it needs from a
+single recursive call instead of two, eliminating the branching.
+
+\bigskip
+\textbf{Time complexity:} $O(n)$ --- each prefix length is computed exactly once.
+
+\end{document}
