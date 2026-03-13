@@ -1,0 +1,121 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.75in, top=0.4in, bottom=0.5in]{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{multicol}
+
+\lstset{
+  language=Java,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\bfseries\color{blue!70!black},
+  commentstyle=\color{green!50!black},
+  stringstyle=\color{red!60!black},
+  showstringspaces=false,
+  frame=single,
+  framesep=4pt,
+  xleftmargin=4pt,
+  xrightmargin=4pt,
+  aboveskip=6pt,
+  belowskip=6pt,
+}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+  {\Large \textbf{CSCI-UA 102 --- Quiz 6}} \\[4pt]
+  {\large Maps and Hash Functions} \\[3pt]
+  Name: \underline{\hspace{2.5in}} \quad NetID: \underline{\hspace{1.5in}}
+\end{center}
+
+\medskip
+
+\noindent Say I create an implementation of \texttt{PositionList<Integer>} called
+\texttt{CrazyList}, and I override \texttt{equals} so that two \texttt{CrazyList}
+objects are equal if:
+\begin{enumerate}[nosep]
+  \item their first elements are equal,
+  \item their last elements are equal, and
+  \item the sum of all their elements are equal.
+\end{enumerate}
+
+\medskip
+
+\noindent\textbf{(1 point)} Write two \texttt{CrazyList}s of length 4 and 5 that are equal.
+
+\bigskip
+
+Length 4: \texttt{[}\underline{\hspace{3.5in}}\texttt{]}
+
+\medskip
+
+Length 5: \texttt{[}\underline{\hspace{3.5in}}\texttt{]}
+
+\bigskip
+
+\noindent\textbf{(4 points)} Write an appropriate implementation of \texttt{hashCode} for \texttt{CrazyList}.
+
+\medskip
+
+\noindent{\footnotesize You may assume these methods:}
+\vspace{-0.5em}
+\begin{multicols}{2}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize, aboveskip=3pt, belowskip=3pt]
+public interface Position<E> {
+    E getElement();
+}
+\end{lstlisting}
+\columnbreak
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize, aboveskip=3pt, belowskip=3pt]
+// Methods of PositionList<E>:
+Position<E> first();
+Position<E> last();
+Position<E> after(Position<E> p);
+\end{lstlisting}
+\end{multicols}
+
+\vfill
+
+\newpage
+
+{\color{blue}
+\section*{Solution}
+
+\textbf{Part 1:} Any two lists with the same first element, last element, and sum.
+
+For example: \texttt{[1, 0, 0, 1]} and \texttt{[1, 0, 0, 0, 1]} --- both have first = 1, last = 1, sum = 2.
+
+\medskip
+
+\textbf{Part 2:} Key insight: the \texttt{hashCode} contract requires that
+equal objects produce the same hash code. Since \texttt{equals} depends only
+on \texttt{first}, \texttt{last}, and \texttt{sum}, the hash code must depend
+only on these three values (not on length or individual elements).
+
+\begin{lstlisting}[basicstyle=\ttfamily\small\color{blue},
+  keywordstyle=\bfseries\color{blue!70!black},
+  commentstyle=\color{blue!50}]
+public int hashCode() {
+    int sum = 0;
+    Position<Integer> current = first();
+    while (current != null) {
+        sum += current.getElement();
+        current = after(current);
+    }
+    int first = first().getElement();
+    int last = last().getElement();
+    return 31 * (31 * first + last) + sum;
+}
+\end{lstlisting}
+
+\textbf{Note:} A simpler \texttt{return first + last + sum;} is also correct ---
+it satisfies the contract but produces more collisions.
+Any formula using only \texttt{first}, \texttt{last}, and \texttt{sum} is valid.
+Using \texttt{length}, individual middle elements, or anything else that
+equal lists could disagree on would \textbf{violate} the contract.
+}
+
+\end{document}
