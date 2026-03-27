@@ -158,7 +158,7 @@ Reading: 10.2
 
 Maps and hash maps. 
 
-In textbook: Qs 10.4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 29, 41
+In textbook: Qs 10.4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 29
 
 ### Class 16, March 23
 
@@ -175,9 +175,121 @@ Getting, adding and removing from BSTs. Implementing BSTs
 Reading: 11.1, 11.2
 
 ### Section 9, March 27
-#### Quiz 7 (Binary search trees)
+#### Quiz 7 (collision resolution)
+
+Collision resolution
+
+In textbook: Qs 10.3, 33, 34, 37, 40, 41, 58, 65
+
+### Section 10, March 30
+#### Assignment 6 (Using BSTs) due
+#### Quiz 8 (Binary search trees)
 
 Binary search trees
 
 In textbook: Qs 11.1, 2, 3, 4, 33
+
+
+### Class 18, April 1
+
+Adding to AVL trees
+
+Reading: 11.3.
+
+### Class 19, April 3
+
+Implementing AVL trees.
+
+Reading: 11.3.
+
+
+### Class 20, April 6
+
+Quadratic sorts. O(nlog n) efficiency proof.
+
+Reading: 9.1, 9.2, 9.4.1, [bubble sort](https://en.wikipedia.org/wiki/Bubble_sort), [bogo sort](https://en.wikipedia.org/wiki/Bogosort), 12.3.1
+
+### Class 21, April 8
+
+Bucketsort, and comparison of sorting algorithms.
+
+Reading: 12.3.2, 12.4
+
+### Section 11, April 10
+#### Quiz 9 (AVL trees or Sorting)
+
+AVL trees and Sorting
+
+In textbook: 11.5, 8, 29, 12.6, 7, 26 -- do these questions for all the sorting algorithms we have covered
+
+
+### Class 22, April 13
+#### Assignment 7 (Sorting with priority queues)  due
+Mergesort. Heaps and Heapsort
+
+Reading: 12.1. 9.3, 9.4
+
+
+### Class 23, April 15
+
+Heaps and Heapsort continued.
+
+Reading: 9.3, 9.4
+
+### Section 12, April 17
+#### Quiz 10 (Efficient Sorting)
+
+Efficient Sorting
+
+In textbook: 12.6, 7, 18, 20-23, 35-37, 39, 42, 43, 46, 47
+
+### Class 24, April 20
+#### Assignment 8 (Radix sort)  due
+
+Graphs and their implementations.
+
+Reading: 9.3, 9.4, 14.1, 14.2
+
+### Section 13, April 22
+#### Quiz 11 (Graphs)
+
+Graphs
+
+In textbook: 14.1-11, 38
+
+
+### Class 25, April 24
+#### Assignment 9 (Heaps) due
+
+Graph implementations cont. Searching graphs.
+
+Reading: 14.1, 14.2, 14.3
+
+### Section 14, April 27
+#### Quiz 12 (Graph search)
+
+Graph search
+
+Textbook Qs for graph search: 14.12-16, 39, 42-44
+
+### Section 15, April 29
+Makeup quizzes (make sure you've filled out the form in the syllabus!)!
+
+### Class 26, May 1
+#### Assignment 10 (Graph implementations) due
+
+Quicksort
+
+Reading: 12.2
+
+### Class 26, May 4
+
+Searching graphs.
+
+Reading: 14.3
+
+
+
+
+
 
