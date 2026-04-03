@@ -224,7 +224,7 @@ In textbook: 11.5, 8, 29, 12.6, 7, 26 -- do these questions for all the sorting 
 
 
 ### Class 22, April 13
-#### Assignment 7 (Sorting with priority queues)  due
+#### Assignment 7 (Sorting with priority queues) due
 Mergesort. Heaps and Heapsort
 
 Reading: 12.1. 9.3, 9.4
@@ -250,43 +250,45 @@ Graphs and their implementations.
 
 Reading: 9.3, 9.4, 14.1, 14.2
 
-### Section 13, April 22
+### Class 25, April 22
+
+Graph implementations cont. Searching graphs.
+
+Reading: 14.1, 14.2, 14.3
+
+### Section 13, April 24
 #### Quiz 11 (Graphs)
 
 Graphs
 
 In textbook: 14.1-11, 38
 
-
-### Class 25, April 24
+### Class 26, April 27
 #### Assignment 9 (Heaps) due
-
-Graph implementations cont. Searching graphs.
-
-Reading: 14.1, 14.2, 14.3
-
-### Section 14, April 27
-#### Quiz 12 (Graph search)
-
-Graph search
-
-Textbook Qs for graph search: 14.12-16, 39, 42-44
-
-### Section 15, April 29
-Makeup quizzes (make sure you've filled out the form in the syllabus!)!
-
-### Class 26, May 1
-#### Assignment 10 (Graph implementations) due
 
 Quicksort
 
 Reading: 12.2
 
-### Class 26, May 4
+### Class 27, April 29
 
 Searching graphs.
 
 Reading: 14.3
+
+### Section 14, May 1
+#### Quiz 12 (Graph search)
+
+Makeup quizzes (make sure you've filled out the form in the syllabus!)!
+Graph search
+
+Textbook Qs for graph search: 14.12-16, 39, 42-44
+
+
+### Class 27, May 4
+#### Assignment 10 (Graph implementations) due
+
+TBD
 
 
 
