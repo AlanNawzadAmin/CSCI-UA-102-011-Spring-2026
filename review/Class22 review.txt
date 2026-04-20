@@ -1,0 +1,7 @@
+
+-- Sorting -- 
+Add 1, 2, ..., 10 to a heap and then remove them all. do the same with 10, 9, ..., 1.
+
+How did we talk about implementing heaps?
+
+Write out the method MergeSort.
