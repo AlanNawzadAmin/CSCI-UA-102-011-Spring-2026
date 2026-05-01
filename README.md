@@ -252,9 +252,9 @@ Reading: 9.3, 9.4, 14.1, 14.2
 
 ### Class 25, April 22
 
-Graph implementations cont. Searching graphs.
+Quicksort
 
-Reading: 14.1, 14.2, 14.3
+Reading: 12.2
 
 ### Section 13, April 24
 #### Quiz 11 (Graphs)
@@ -266,9 +266,9 @@ In textbook: 14.1-11, 38
 ### Class 26, April 27
 #### Assignment 9 (Heaps) due
 
-Quicksort
+Graph implementations cont. Searching graphs.
 
-Reading: 12.2
+Reading: 14.1, 14.2, 14.3
 
 ### Class 27, April 29
 
@@ -288,7 +288,9 @@ Textbook Qs for graph search: 14.12-16, 39, 42-44
 ### Class 27, May 4
 #### Assignment 10 (Graph implementations) due
 
-TBD
+Searching graphs.
+
+Reading: 14.3
 
 
 

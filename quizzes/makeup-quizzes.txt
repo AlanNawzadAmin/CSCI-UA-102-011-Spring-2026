@@ -1,0 +1,105 @@
+
+1.
+Write a method `void oddSwap(PositionList<Integer> list)` that goes through every position of the given PositionList starting from the first; at every position, if the element at the position is even while the following element is odd, the elements are swapped. The implementation should run in linear time.
+
+For example, given the list: 8, 3, 6, 5, 4
+Swap 8 and 3 -> 3, 8, 6, 5, 4
+Swap 8 and 6? No (6 is even) -> 3, 8, 6, 5, 4
+Swap 6 and 5 -> 3, 8, 5, 6, 4
+Swap 6 and 4? No (4 is even) -> 3, 8, 5, 6, 4
+
+
+
+2.
+(a) Implement the following method: `public static <E> boolean search(Stack<E> stack, E element)`. Ensure that when your method returns, the stack remains unchanged from its original state. You may initialize other stacks and queues.
+
+(b) If the push and pop operations have an asymptotic complexity of O(1) for a particular implementation, what are the best and worst case asymptotic complexities of this method?
+
+
+
+3.
+Define the sequence with initial conditions Y_1 = 2, Y_2 = 1, Y_3 = 3, and recurrence relation: Y_{n+2} = Y_{n+1} + Y_n * Y_{n−1}. Write a recursive method to calculate the n-th term of this sequence. Ensure that the method runs in linear time.
+
+
+
+4.
+Implement a recursive method that counts how many times an element appears in a binary tree times the depth of each appearance: ```public int depthCount(Tree<E> tree, E element)```. For example, if element appears twice in the tree at nodes of depths 1 and 4 then depthCount will be 5. Hint: use depth as an auxiliary variable.
+
+
+
+5.
+Implement a method ```public PositionList<E> appearOnce(PositionList<E> list)``` which returns a list of all elements in list which appear exactly once. Make sure to use UnsortedMap!
+
+
+
+6.
+```
+public class funnyList extends DoublyLinkedList<Integer>{
+    public boolean equals(funnyList list2){
+        if (size != list2.size()) return false;
+        boolean equal_at_odd = true;
+        for (int i = 0; i < list2.size()/2; i++){
+            equal_at_odd = equal_at_odd && (getAtIndex(2*i+1) == list2.getAtIndex(2*i+1));
+        }
+        Integer sum1 = 0;
+        Integer sum2 = 0;
+        for (int i = 0; i < list2.size(); i++){
+            sum1 = sum1 + getAtIndex(i);
+            sum2 = sum2 + list2.getAtIndex(i);
+        }
+        return equal_at_odd && (sum1 == sum2);
+    }
+}
+```
+(a) (1 points) What does equals check? Write two funnyLists that are equal according to this method but are not equal as DoublyLinkedLists.
+
+(b) (4 points) Based on this implementation of equals, implement a sensible version of hashCode().
+
+
+
+7.
+(a) (1 point) Draw a binary search tree of entries with keys 1, 2, . . . , 12 that has height 4.
+
+(b) (2 points) In what order do we have to call put(key, value) on these entries to get the tree you drew?
+
+(c) (7 points) Remove the entries in the order you added them. Redraw the tree after each removal.
+
+
+
+8.
+(a) Draw two AVL trees that have the same elements but in a different topology. Describe what order you would have to add the elements to arrive at each AVL tree.
+
+(b) Add the numbers 8, 2, 14, 4, 12, 6, 10, 1, 15, 3, 13, 5, 11, 7, 9, 0 to an AVL tree. Redraw the tree after each addition.
+
+(c) Remove those numbers in the same order. Redraw the tree after each removal.
+
+
+9.
+Write a method `int secondSmallest(int[] array)` which returns the second smallest element of the array. Make sure your method runs in O(n * log n) time.
+
+
+
+10.
+(1) (1 points) Write a method to calculate the depth of a node in a heap given its index: `public int depth(int index)`.
+
+(2) (2.5 points) What positions in a heap can the second smallest element be in, in terms of height and size?
+
+(3) (1.5 points) Implement `int secondMin()` that returns the second minimum entry in a heap of integers. Make sure it checks as few elements as possible.
+
+
+
+11.
+You will write a method ```public boolean pathExists(V a, V b)``` that returns true if there is a directed path from the vertex storing element a to the vertex storing element b. Say we've implemented a graph with n nodes and m edges using EdgeListGraph.
+
+(a) Write a method using depth-first search. What is the efficiency of your method in terms of n and m?
+
+(b) Write a method using breadth-first search. What is the efficiency of your method in terms of n and m?
+
+
+
+12.
+Let's say we want to write a method that finds a vertex with maximum outDegree: ```public Vertex<V> maxOutDegree()```. Say we've implemented a graph with n nodes and m edges using EdgeListGraph.
+
+(a) (1 points) One way to do this is to loop through the list vertices and call outDegree on every vertex. What is the worst case asymptotic computational complexity of such a method?
+
+(b) (4 points) Write a more efficient implementation by initializing a ```Map<Vertex<V>, Integer>``` that counts the number of edges ending at every vertex and looping through the list edges. What is the worst case asymptotic computational complexity of this method?
